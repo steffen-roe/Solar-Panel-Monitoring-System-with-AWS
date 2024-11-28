@@ -3,7 +3,7 @@ After I got familiar with core AWS services like EC2, VPCs, subnets, and more, I
 
 It features a web application designed to monitor and visualize real-time and historical solar panel output data, leveraging AWS services for the backend and a React frontend for data visualization.
 
-<img src="r[elative/path/in/repository/to/image.svg](https://github.com/steffen-roe/Solar-Panel-Monitoring-System-with-AWS/blob/6992e1138e3805260a4f96da09f79ad613f83d2e/dashboard.png)" width="128"/>
+<img src="https://github.com/steffen-roe/Solar-Panel-Monitoring-System-with-AWS/blob/6992e1138e3805260a4f96da09f79ad613f83d2e/dashboard.png" width="128"/>
 
 ## Features
 - Real-time data visualization of solar panel output
