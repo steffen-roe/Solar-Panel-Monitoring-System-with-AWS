@@ -7,3 +7,5 @@ It features a web application designed to monitor and visualize real-time and hi
 - Real-time data visualization of solar panel output
 - Historical data filtering by date and predefined ranges
 - Serverless backend powered by AWS
+
+![alt text](https://github.com/steffen-roe/Solar-Panel-Monitoring-System-with-AWS/blob/6992e1138e3805260a4f96da09f79ad613f83d2e/dashboard.png)
