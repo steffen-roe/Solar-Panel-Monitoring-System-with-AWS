@@ -32,7 +32,6 @@ The backend logic of the solar panel monitoring system is implemented using mult
   - Extracts key metrics such as time, energy, power, and panel temperature from the website using BeautifulSoup.
   - Ensures the data is only stored if the scraped time matches the current hour.
   - Adds an `expireAt` attribute to DynamoDB items to ensure data is automatically deleted after one week.
-- **Technologies Used**: Python, BeautifulSoup (for web scraping), AWS SDK (Boto3), AWS DynamoDB.
 
 ---
 
@@ -42,7 +41,6 @@ The backend logic of the solar panel monitoring system is implemented using mult
   - Queries DynamoDB for data collected on the current day.
   - Stores the data in an S3 bucket with a hierarchical folder structure (`year/month/day.json`) for easy organization.
   - Ensures data availability for historical analysis while optimizing DynamoDB costs.
-- **Technologies Used**: AWS DynamoDB, AWS S3, Python (Boto3 for AWS interactions).
 
 ---
 
@@ -54,7 +52,13 @@ The backend logic of the solar panel monitoring system is implemented using mult
     - **Weekly/Monthly**: Fetches maximum energy values from archived S3 data for the past 7 or 30 days.
     - **Specific Date**: Retrieves archived data from S3 for a user-specified date in `YYYYMMDD` format.
   - Includes CORS preflight response handling for secure cross-origin API access.
-- **Technologies Used**: Python (Boto3 for AWS), AWS API Gateway, AWS DynamoDB, AWS S3.
+
+---
+
+##### Technologies Used
+- **Programming Language**: Python
+- **AWS Services**: Lambda, DynamoDB, S3, API Gateway
+- **Libraries and Tools**: BeautifulSoup (for web scraping), Boto3 (for AWS interactions), `datetime` and `time` modules (for time handling), robust logging.
 
 
 ### Frontend
