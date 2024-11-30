@@ -14,8 +14,12 @@ The initial plan was to extract solar panel data directly from our home installa
 ![Architecture Diagram](https://github.com/steffen-roe/Solar-Panel-Monitoring-System-with-AWS/blob/5c4dde6fd876a5ee887530eb7c58a4858f3a5081/architecture_diagram.png)
 
 ## Key Components
-### DynamoDB
+
+### Backend
+#### DynamoDB
 DynamoDB was used to store and manage real-time daily solar panel output data efficiently. Its key-value structure is ideal for organizing time-series data, such as power output, panel temperature, and timestamps. With its low-latency performance and automatic scaling, DynamoDB ensures fast, reliable access to data for live visualization. Additional features like TTL (Time-to-Live) help manage data retention by automatically expiring older records, keeping the system lightweight and optimized. In addition, DynamoDB is fully managed by AWS and, therefore, fits seamlessly into serverless workflows, such as those using AWS Lambda.
 
-### Simple Storage Service (S3)
+#### Simple Storage Service (S3)
 To maintain cost efficiency, data that does not require frequent or fast access is periodically archived to an S3 bucket. The bucket is organized using a logical structure based on year and month, making it easy to retrieve historical data when needed. This approach reduces DynamoDB storage costs while leveraging S3's low-cost storage solution for infrequently accessed data, such as long-term performance trends or older solar panel metrics.
+
+### Frontend
