@@ -23,6 +23,38 @@ AWS DynamoDB was used to store and manage real-time daily solar panel output dat
 To maintain cost efficiency, data that does not require frequent or fast access is periodically archived to an AWS S3 bucket. The bucket is organized using a logical structure based on year and month, making it easy to retrieve historical data when needed. This approach reduces DynamoDB storage costs while leveraging S3's low-cost storage solution for infrequently accessed data, such as long-term performance trends or older solar panel metrics.
 
 #### Lambda Functions
-AWS Lambda 
+
+The backend logic of the solar panel monitoring system is implemented using multiple AWS Lambda functions. These functions handle data scraping, processing, storage, and retrieval tasks. Below are the key Lambda functions and their roles:
+
+##### 1. **Data Scraper Function**
+- **Purpose**: Periodically scrapes live solar panel data from a specified website and stores it in DynamoDB.
+- **Details**:
+  - Extracts key metrics such as time, energy, power, and panel temperature from the website using BeautifulSoup.
+  - Ensures the data is only stored if the scraped time matches the current hour.
+  - Adds an `expireAt` attribute to DynamoDB items to ensure data is automatically deleted after one week.
+- **Technologies Used**: Python, BeautifulSoup (for web scraping), AWS SDK (Boto3), AWS DynamoDB.
+
+---
+
+##### 2. **Data Archiver Function**
+- **Purpose**: Archives daily data from DynamoDB into Amazon S3 for long-term storage in JSON format.
+- **Details**:
+  - Queries DynamoDB for data collected on the current day.
+  - Stores the data in an S3 bucket with a hierarchical folder structure (`year/month/day.json`) for easy organization.
+  - Ensures data availability for historical analysis while optimizing DynamoDB costs.
+- **Technologies Used**: AWS DynamoDB, AWS S3, Python (Boto3 for AWS interactions).
+
+---
+
+##### 3. **Data Retrieval and API Handler Function**
+- **Purpose**: Responds to API Gateway requests to fetch solar panel data based on user-specified ranges or dates.
+- **Details**:
+  - Supports the following query ranges:
+    - **Daily**: Retrieves data from DynamoDB for the current day.
+    - **Weekly/Monthly**: Fetches maximum energy values from archived S3 data for the past 7 or 30 days.
+    - **Specific Date**: Retrieves archived data from S3 for a user-specified date in `YYYYMMDD` format.
+  - Includes CORS preflight response handling for secure cross-origin API access.
+- **Technologies Used**: Python (Boto3 for AWS), AWS API Gateway, AWS DynamoDB, AWS S3.
+
 
 ### Frontend
