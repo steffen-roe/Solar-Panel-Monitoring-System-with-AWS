@@ -61,43 +61,8 @@ The backend logic of the solar panel monitoring system is implemented using mult
 
 ### API Gateway
 
-The API Gateway acts as the entry point for the solar panel monitoring system, enabling users to retrieve data stored in DynamoDB and S3 through secure HTTP requests. It provides a scalable and efficient interface for accessing the backend logic.
+AWS API Gateway is used to expose HTTP endpoints that connect the front-end application with the back-end services, allowing it to trigger Lambda functions to fetch data from DynamoDB and S3. It is configured with Cross-Origin Resource Sharing (CORS) to allow the React front-end to make requests without security issues. The flow goes as follows: The front-end React application makes a request to the API Gateway (GET /solar-data). The API Gateway then routes the request to the corresponding Lambda function, which in turn processes the request, queries DynamoDB or the S3 bucket for solar panel data, and returns it to the API Gateway. Finally, the API Gateway sends the processed response back to the front-end.
 
-#### Key Features
-1. **Routing and Integration**:
-   - Routes incoming requests to the appropriate Lambda functions based on HTTP methods and query parameters.
-   - Facilitates seamless communication between the client-side application and AWS services.
-
-2. **Query Support**:
-   - **Daily Data**: Retrieves solar panel metrics (e.g., energy, power, temperature) for the current day from DynamoDB.
-   - **Historical Data**:
-     - **Weekly/Monthly**: Retrieves maximum energy values from archived S3 data for the past 7 or 30 days.
-     - **Specific Date**: Fetches archived data from S3 for a user-specified date in `YYYYMMDD` format.
-
-3. **CORS Handling**:
-   - Implements preflight responses for `OPTIONS` requests to enable cross-origin resource sharing.
-   - Ensures compatibility with client-side applications by allowing secure access across domains.
-
-4. **Error Handling**:
-   - Validates query parameters (e.g., `range` or `date`) to ensure proper request formatting.
-   - Returns detailed error messages for invalid requests or server-side issues.
-
----
-
-#### API Endpoints
-- **GET /solar-data**: Retrieves solar panel data based on query parameters:
-  - `range=day`: Fetches current day's data.
-  - `range=7` or `range=30`: Fetches historical energy maximums for the last 7 or 30 days.
-  - `range=YYYYMMDD`: Fetches data for a specific date.
-- **OPTIONS /solar-data**: Handles CORS preflight requests.
-
----
-
-#### Security
-- **Authentication and Authorization**:
-  - Can be integrated with AWS IAM or Cognito for secure access (e.g., token-based authentication).
-- **Throttling**:
-  - Configured to limit the number of requests per second, preventing abuse and ensuring consistent performance.
 
 
 
