@@ -43,7 +43,7 @@ The backend logic of the solar panel monitoring system is implemented using mult
   - Stores the data in an S3 bucket with a hierarchical folder structure (`year/month/day.json`) for easy organization.
   - Ensures data availability for historical analysis while optimizing DynamoDB costs.
 
-#### 3. **Data Retrieval and API Handler Function**
+#### 3. **API Handler Function**
 - **Purpose**: Responds to API Gateway requests to fetch solar panel data based on user-specified ranges or dates.
 - **Details**:
   - Supports the following query ranges:
