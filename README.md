@@ -18,8 +18,12 @@ The initial plan was to extract solar panel data directly from our home installa
 ### DynamoDB
 AWS DynamoDB was used to store and manage real-time daily solar panel output data efficiently. Its key-value structure is ideal for organizing time-series data, such as power output, panel temperature, and timestamps. With its low-latency performance and automatic scaling, DynamoDB ensures fast, reliable access to data for live visualization. Additional features like TTL (Time-to-Live) help manage data retention by automatically expiring older records, keeping the system lightweight and optimized. In addition, DynamoDB is fully managed by AWS and, therefore, fits seamlessly into serverless workflows, such as those using AWS Lambda.
 
+---
+
 ### Simple Storage Service (S3)
 To maintain cost efficiency, data that does not require frequent or fast access is periodically archived to an AWS S3 bucket. The bucket is organized using a logical structure based on year and month, making it easy to retrieve historical data when needed. This approach reduces DynamoDB storage costs while leveraging S3's low-cost storage solution for infrequently accessed data, such as long-term performance trends or older solar panel metrics.
+
+---
 
 ### Lambda Functions
 
@@ -32,16 +36,12 @@ The backend logic of the solar panel monitoring system is implemented using mult
   - Ensures the data is only stored if the scraped time matches the current hour.
   - Adds an `expireAt` attribute to DynamoDB items to ensure data is automatically deleted after one week.
 
----
-
 #### 2. **Data Archiver Function**
 - **Purpose**: Archives daily data from DynamoDB into Amazon S3 for long-term storage in JSON format.
 - **Details**:
   - Queries DynamoDB for data collected on the current day.
   - Stores the data in an S3 bucket with a hierarchical folder structure (`year/month/day.json`) for easy organization.
   - Ensures data availability for historical analysis while optimizing DynamoDB costs.
-
----
 
 #### 3. **Data Retrieval and API Handler Function**
 - **Purpose**: Responds to API Gateway requests to fetch solar panel data based on user-specified ranges or dates.
@@ -52,17 +52,18 @@ The backend logic of the solar panel monitoring system is implemented using mult
     - **Specific Date**: Retrieves archived data from S3 for a user-specified date in `YYYYMMDD` format.
   - Includes CORS preflight response handling for secure cross-origin API access.
 
----
-
 #### Technologies Used
 - **Programming Language**: Python
 - **AWS Services**: Lambda, DynamoDB, S3, API Gateway
 - **Libraries and Tools**: BeautifulSoup (for web scraping), Boto3 (for AWS interactions), `datetime` and `time` modules (for time handling), robust logging.
 
+---
+
 ### API Gateway
 
 AWS API Gateway is used to expose HTTP endpoints that connect the front-end application with the back-end services, allowing it to trigger Lambda functions to fetch data from DynamoDB and S3. It is configured with Cross-Origin Resource Sharing (CORS) to allow the React front-end to make requests without security issues. The flow goes as follows: The front-end React application makes a request to the API Gateway (GET /solar-data). The API Gateway then routes the request to the corresponding Lambda function, which in turn processes the request, queries DynamoDB or the S3 bucket for solar panel data, and returns it to the API Gateway. Finally, the API Gateway sends the processed response back to the front-end.
 
+---
 
 
 
