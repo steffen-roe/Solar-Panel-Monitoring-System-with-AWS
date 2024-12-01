@@ -63,6 +63,8 @@ The backend logic of the solar panel monitoring system is implemented using mult
 
 AWS API Gateway is used to expose HTTP endpoints that connect the front-end application with the back-end services, allowing it to trigger Lambda functions to fetch data from DynamoDB and S3. It is configured with Cross-Origin Resource Sharing (CORS) to allow the React front-end to make requests without security issues. The flow goes as follows: The front-end React application makes a request to the API Gateway (GET /solar-data). The API Gateway then routes the request to the corresponding Lambda function, which in turn processes the request, queries DynamoDB or the S3 bucket for solar panel data, and returns it to the API Gateway. Finally, the API Gateway sends the processed response back to the front-end.
 
+---
+
 ### IAM
 
 AWS Identity and Access Management (IAM) was used to securely manage access to the resources in this project. By applying the principle of least privilege, each IAM role and policy was configured to grant only the minimum permissions required for a specific task. For example, the Lambda functions were assigned roles that allowed access only to the necessary DynamoDB tables, S3 buckets, or EventBridge events, with only the necessary read/write operations.
