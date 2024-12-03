@@ -33,7 +33,7 @@ The backend logic of the solar panel monitoring system is implemented using mult
 - **Purpose**: Periodically scrapes live solar panel data from a specified website and stores it in DynamoDB.
 - **Details**:
   - Extracts key metrics such as time, energy, power, and panel temperature from the website using BeautifulSoup.
-  - Ensures the data is only stored if the scraped time matches the current hour.
+  - Ensures the data is only stored if the scraped time matches the current hour (website occasionally displays wrong timestamps) .
   - Adds an `expireAt` attribute to DynamoDB items to ensure data is automatically deleted after one week.
 
 #### 2. **Data Archiver Function**
@@ -74,3 +74,15 @@ AWS Identity and Access Management (IAM) was used to securely manage access to t
 ### Frontend
 
 The frontend of the solar panel monitoring system is a React application hosted on an Amazon S3 bucket. The S3 bucket stores the static website files and serves them to users through Amazon CloudFront, a content delivery network (CDN) that ensures fast and reliable access to the site from different locations.
+
+## 💡 Skills Demonstrated
+- Serverless Architecture: Hands-on experience with AWS Lambda, DynamoDB, and S3.
+- Data Processing: Implemented web scraping and time-series data management.
+- Frontend-Backend Integration: Seamlessly connected a React frontend to AWS services via API Gateway.
+- Scalability: Designed a system to handle fluctuating data loads with minimal manual intervention.
+- Cost Optimization: Leveraged tiered storage and TTL policies to manage operational costs.
+
+## 🚀 Future Improvements
+
+- Weather Data Integration: Incorporate weather forecasts to predict solar panel performance using machine learning.
+- Real-Time Alerts: Notify users of unusual solar output via SNS or email.
