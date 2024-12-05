@@ -46,26 +46,24 @@ function App() {
         chartRef.current.destroy();
       }
 
-      // Prepare labels and datasets based on the range
+      // Prepare labels and datasets
       let labels = [];
       let powerData = [];
       let energyData = [];
 
       // Process the data based on range
       if (range === "day" || range.length === 8) {
-        labels = data.map(({ time }) => time); // Time of day for 'day' range
-        powerData = data.map(({ power }) => power); // Power for 'day' range
-        energyData = data.map(({ energy }) => energy); // Energy for 'day' range
+        labels = data.map(({ time }) => time); 
+        powerData = data.map(({ power }) => power); 
+        energyData = data.map(({ energy }) => energy); 
         setType("line");
       } else if (range === "7" || range == "30") {
-        // Process the data differently for a 7-day range
-        labels = data.map(({ date }) => date); // Use date for '7' range
-        energyData = data.map(({ max_energy }) => max_energy); // Weekly energy data for '7' range
+        labels = data.map(({ date }) => date); 
+        energyData = data.map(({ max_energy }) => max_energy); 
         setType("bar");
       }
 
-      // Create the new chart instance
-
+      // Create new chart instance
       if (type === "line") {
         chartRef.current = new Chart(canvas, {
           type: 'line', // Choose chart type based on range
@@ -77,9 +75,9 @@ function App() {
                 data: powerData,
                 borderColor: '#FF6F00',
                 backgroundColor: 'rgba(255, 111, 0, 0.2)',
-                tension: 0.4, // Add tension for line chart, none for bar chart
+                tension: 0.4, 
                 fill: false,
-                yAxisID: 'y', // Associate with the left y-axis
+                yAxisID: 'y', 
                 pointRadius: 0, 
                 borderWidth: 4,
               },
@@ -87,11 +85,11 @@ function App() {
                 label: 'Energy Generated (kWh)',
                 data: energyData, 
                 borderColor: '#007BFF',
-                backgroundColor: 'rgba(0, 123, 255, 0.2)', // Adjust color for bar chart
-                tension: 0.4, // Add tension for line chart, none for bar chart
-                fill: true, // Keep fill for both
-                yAxisID: 'y1', // Associate with the right y-axis
-                pointRadius: 0, // Remove points for bar chart
+                backgroundColor: 'rgba(0, 123, 255, 0.2)', 
+                tension: 0.4, 
+                fill: true, 
+                yAxisID: 'y1',
+                pointRadius: 0, 
                 borderWidth: 4,
               },
             ],
@@ -117,13 +115,13 @@ function App() {
               x: {
                 title: {
                   display: true,
-                  text: 'Time of Day', // Adjust title based on range
+                  text: 'Time of Day', 
                 },
                 grid: {
                   color: 'rgba(255, 255, 255, 0)',
                 },
                 ticks: {
-                  maxTicksLimit: 10, // Adjust ticks for better visibility
+                  maxTicksLimit: 10, 
                 },
               },
               y: {
@@ -135,7 +133,7 @@ function App() {
                   color: 'rgba(255, 255, 255, 0.1)',
                 },
                 beginAtZero: true,
-                position: 'left', // Ensure it's on the left side
+                position: 'left', 
               },
               y1: {
                 title: {
@@ -143,9 +141,9 @@ function App() {
                   text: 'Energy (kWh)',
                 },
                 grid: {
-                  drawOnChartArea: false, // Prevent grid lines for this axis
+                  drawOnChartArea: false, 
                 },
-                position: 'right', // Place on the right side
+                position: 'right', 
                 beginAtZero: true,
               },
             },
@@ -161,10 +159,10 @@ function App() {
                 label: 'Energy Generated (kWh)',
                 data: energyData, 
                 borderColor: '#007BFF',
-                backgroundColor: 'rgba(0, 123, 255, 0.7)', // Adjust color for bar chart
-                tension: 0, // Add tension for line chart, none for bar chart
-                fill: true, // Keep fill for both
-                pointRadius: 0, // Remove points for bar chart
+                backgroundColor: 'rgba(0, 123, 255, 0.7)', 
+                tension: 0,
+                fill: true, 
+                pointRadius: 0,
               },
             ],
           },
@@ -188,13 +186,13 @@ function App() {
               x: {
                 title: {
                   display: true,
-                  text: 'Date', // Adjust title based on range
+                  text: 'Date', 
                 },
                 grid: {
                   color: 'rgba(255, 255, 255, 0)',
                 },
                 ticks: {
-                  maxTicksLimit: 7, // Adjust ticks for better visibility
+                  maxTicksLimit: 7, 
                 },
               },
               y: {
@@ -205,7 +203,7 @@ function App() {
                 grid: {
                   color: 'rgba(255, 255, 255, 0.1)',
                 },
-                position: 'left', // Place on the right side
+                position: 'left',
                 beginAtZero: true,
               },
             },

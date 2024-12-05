@@ -65,7 +65,7 @@ const DropdownMenu = ({ range, setRange }) => {
         break;
       case "Last Month":
         setRange("30");
-        break; // Ensure break here
+        break; 
       default:
         console.error("Invalid option selected");
     }
