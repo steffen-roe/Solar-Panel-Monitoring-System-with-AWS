@@ -80,10 +80,10 @@ The frontend of the solar panel monitoring system is a React application hosted 
 - Serverless Architecture: Hands-on experience with AWS Lambda, DynamoDB, and S3.
 - Data Processing: Implemented web scraping and time-series data management.
 - Frontend-Backend Integration: Seamlessly connected a React frontend to AWS services via API Gateway.
-- Scalability: Designed a system to handle fluctuating data loads with minimal manual intervention.
 - Cost Optimization: Leveraged tiered storage and TTL policies to manage operational costs.
 
 ## 🚀 Future Improvements
 
 - Weather Data Integration: Incorporate weather forecasts to predict solar panel performance using machine learning.
 - Real-Time Alerts: Notify users of unusual solar output via SNS or email.
+- Additional metrics like energy consumption, net metering, monthly/yearly energy production
